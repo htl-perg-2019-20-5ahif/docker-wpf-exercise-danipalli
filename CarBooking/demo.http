@@ -1,0 +1,70 @@
+@host = http://localhost:5000/api
+# @host = https://bike-rental-api.azurewebsites.net/api
+
+###
+POST {{host}}/customers
+Content-Type: application/json
+
+{
+    "firstName": "Max",
+    "lastName": "Mustermann"
+}
+
+###
+POST {{host}}/customers
+Content-Type: application/json
+
+{
+    "firstName": "Maria",
+    "lastName": "Musterfrau"
+}
+
+###
+POST {{host}}/cars
+Content-Type: application/json
+
+{
+    "make": "Ford",
+    "model": "Fiesta"
+}
+
+###
+POST {{host}}/cars
+Content-Type: application/json
+
+{
+    "make": "Ford",
+    "model": "Mustang"
+}
+
+###
+POST {{host}}/cars
+Content-Type: application/json
+
+{
+    "make": "Range Rover",
+    "model": "Landtruck"
+}
+
+###
+POST {{host}}/bookings
+Content-Type: application/json
+
+{
+    "carID": 5,
+    "customerID": 2,
+    "date": "2020-01-20T08:15:00Z"
+}
+
+###
+GET {{host}}/customers
+
+###
+GET {{host}}/cars
+
+###
+GET {{host}}/cars?year=2020&month=01&day=20
+
+
+
+
