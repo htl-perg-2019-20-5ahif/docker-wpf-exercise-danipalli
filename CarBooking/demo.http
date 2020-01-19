@@ -2,6 +2,9 @@
 # @host = https://bike-rental-api.azurewebsites.net/api
 
 ###
+GET {{host}}/ping
+
+###
 POST {{host}}/customers
 Content-Type: application/json
 
