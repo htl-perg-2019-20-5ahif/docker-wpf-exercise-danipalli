@@ -28,8 +28,6 @@ namespace CarBookingAPI.Controllers
 
             DateTime date = default;
 
-            Console.WriteLine(year);
-
             if (year != 0 && month != 0 && day != 0)
             {
                 try
