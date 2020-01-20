@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace CarBookingAPI
 {
@@ -38,7 +39,11 @@ namespace CarBookingAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                scope.ServiceProvider.GetService<CarBookingDbContext>().Database.Migrate();
+                scope.ServiceProvider.GetService<CarBookingDbContext>().Database.ExecuteSqlRaw(File.ReadAllText("Migrations.sql"));
+            }
 
             app.UseRouting();
 

@@ -11,9 +11,9 @@
             <TextBlock FontSize="30" Text="Car List" />
             
             <StackPanel Orientation="Horizontal" Margin="0 10">
-                <DatePicker Width="200" Margin="0 0 10 0"></DatePicker>
-                <Button Content="Apply Filter" Margin="10 0"></Button>
-                <Button Content="Reset Filter" Margin="10 0"></Button>
+                <DatePicker Name="DateFilter" Width="200" Margin="0 0 10 0"/>
+                <Button Content="Apply Filter" Margin="10 0" Click="LoadCarsFiltered"></Button>
+                <Button Content="Reset Filter" Margin="10 0" Click="LoadCars"></Button>
 
             </StackPanel>
             
