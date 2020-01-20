@@ -13,7 +13,7 @@ namespace CarBookingGUI
     public partial class MainWindow : Window
     {
         private static HttpClient HttpClient
-            = new HttpClient() { BaseAddress = new Uri("http://localhost:5000/api") };
+            = new HttpClient() { BaseAddress = new Uri("http://localhost:5000/api/") };
 
         public ObservableCollection<Car> CarList = new ObservableCollection<Car>();
 

@@ -16,14 +16,9 @@
                 <Button Content="Reset Filter" Margin="10 0" Click="LoadCars"></Button>
 
             </StackPanel>
-            
-            <DataGrid Grid.Row="1" ItemsSource="{Binding}" AutoGenerateColumns="False" IsReadOnly="True" Grid.ColumnSpan="3" >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Taxi.LicensePlate}" Header="ID" />
-                        <DataGridTextColumn Binding="{Binding Driver.Name}" Header="Make" />
-                    <DataGridTextColumn Binding="{Binding Start, StringFormat=\{0:dd.MM.yyyy HH:mm\}}" Header="Model" />
-                </DataGrid.Columns>
-            </DataGrid>
+
+        <DataGrid Grid.Row="1" ItemsSource="{Binding CarList}" AutoGenerateColumns="False" IsReadOnly="True" Grid.ColumnSpan="3" >
+        </DataGrid>
             
         </StackPanel>
 

@@ -54,7 +54,7 @@ POST {{host}}/bookings
 Content-Type: application/json
 
 {
-    "carID": 5,
+    "carID": 1,
     "customerID": 2,
     "date": "2020-01-20T08:15:00Z"
 }
