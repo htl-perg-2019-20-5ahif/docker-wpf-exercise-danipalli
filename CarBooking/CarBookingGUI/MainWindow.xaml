@@ -31,7 +31,7 @@
                 <TextBlock  Text="CarID: "/>
                 <TextBox Name="SelectCarID" Width="20" InputScope="Number"/>
 
-                <TextBlock  Text="CustomerID: " Margin="10 0 0 0"/>
+                <TextBlock  Text="CustomerID (1-38): " Margin="10 0 0 0"/>
                 <TextBox Name="SelectCustomerID" Width="20" InputScope="Number"/>
 
                 <Button Content=" Book " Click="BookCar" Margin="20 0 0 0"></Button>
