@@ -5,13 +5,28 @@ namespace CarBookingGUI
 {
     public class Car
     {
-        [JsonPropertyName("ID")]
+        [JsonPropertyName("id")]
         public int ID { get; set; }
 
-        [JsonPropertyName("Make")]
+        [JsonPropertyName("make")]
         public String Make { get; set; }
 
-        [JsonPropertyName("Model")]
+        [JsonPropertyName("model")]
         public String Model { get; set; }
+    }
+
+    public class Booking
+    {
+        [JsonPropertyName("id")]
+        public int ID { get; set; }
+
+        [JsonPropertyName("carID")]
+        public int CarID { get; set; }
+
+        [JsonPropertyName("customerID")]
+        public int CustomerID { get; set; }
+
+        [JsonPropertyName("date")]
+        public DateTime Date { get; set; }
     }
 }

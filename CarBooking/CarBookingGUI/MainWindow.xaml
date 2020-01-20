@@ -6,20 +6,38 @@
         xmlns:local="clr-namespace:CarBookingGUI"
         mc:Ignorable="d"
         Title="Car Booking" Height="450" Width="800">
-    
-        <StackPanel Orientation="Vertical" Margin="10">
+
+    <DockPanel Margin="10">
+        <DataGrid ItemsSource="{Binding Path=CarList}" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding ID}" Header="ID" />
+                <DataGridTextColumn Binding="{Binding Make}" Header="Make" />
+                <DataGridTextColumn Binding="{Binding Model}" Header="Model" />
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <StackPanel Margin="30 0 0 0">
             <TextBlock FontSize="30" Text="Car List" />
-            
+
             <StackPanel Orientation="Horizontal" Margin="0 10">
                 <DatePicker Name="DateFilter" Width="200" Margin="0 0 10 0"/>
                 <Button Content="Apply Filter" Margin="10 0" Click="LoadCarsFiltered"></Button>
                 <Button Content="Reset Filter" Margin="10 0" Click="LoadCars"></Button>
-
             </StackPanel>
 
-        <DataGrid Grid.Row="1" ItemsSource="{Binding CarList}" AutoGenerateColumns="False" IsReadOnly="True" Grid.ColumnSpan="3" >
-        </DataGrid>
-            
-        </StackPanel>
+            <TextBlock FontSize="20" Text="Book" />
 
+            <StackPanel Orientation="Horizontal">
+                <TextBlock  Text="CarID: "/>
+                <TextBox Name="SelectCarID" Width="20" InputScope="Number"/>
+
+                <TextBlock  Text="CustomerID: " Margin="10 0 0 0"/>
+                <TextBox Name="SelectCustomerID" Width="20" InputScope="Number"/>
+
+                <Button Content=" Book " Click="BookCar" Margin="20 0 0 0"></Button>
+            </StackPanel>
+            
+            <TextBlock Name="MessageBox"/>
+        </StackPanel>
+    </DockPanel>
 </Window>

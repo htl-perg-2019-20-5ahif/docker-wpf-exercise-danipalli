@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,7 +17,7 @@ namespace CarBookingGUI
         private static HttpClient HttpClient
             = new HttpClient() { BaseAddress = new Uri("http://localhost:5000/api/") };
 
-        public ObservableCollection<Car> CarList = new ObservableCollection<Car>();
+        public ObservableCollection<Car> CarList { get; set; } = new ObservableCollection<Car>();
 
         public MainWindow()
         {
@@ -24,7 +26,7 @@ namespace CarBookingGUI
             LoadCars(null, null);
         }
 
-        private async Task<Car[]> loadCars(int year, int month, int day)
+        private async Task<List<Car>> loadCars(int year, int month, int day)
         {
             HttpResponseMessage carBookingResponse;
             if (year != 0 && month != 0 && day != 0)
@@ -37,12 +39,13 @@ namespace CarBookingGUI
             }
             carBookingResponse.EnsureSuccessStatusCode();
             var responseBody = await carBookingResponse.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<Car[]>(responseBody);
+            return JsonSerializer.Deserialize<List<Car>>(responseBody);
         }
 
         private async void LoadCarsFiltered(object sender, RoutedEventArgs e)
         {
-            if (DateFilter.DisplayDate != null)
+            MessageBox.Text = "";
+            if (DateFilter.DisplayDate != default)
             {
                 _UpdateCars(await loadCars(DateFilter.DisplayDate.Year, DateFilter.DisplayDate.Month, DateFilter.DisplayDate.Day));
             }
@@ -50,15 +53,46 @@ namespace CarBookingGUI
 
         private async void LoadCars(object sender, RoutedEventArgs e)
         {
+            MessageBox.Text = "";
             _UpdateCars(await loadCars(0, 0, 0));
         }
 
-        private void _UpdateCars(Car[] carArray)
+        private void _UpdateCars(IEnumerable<Car> carArray)
         {
-            CarList = new ObservableCollection<Car>();
+            CarList.Clear();
             foreach (Car car in carArray)
             {
                 CarList.Add(car);
+            }
+        }
+
+        private async void BookCar(object sender, RoutedEventArgs e)
+        {
+            if (DateFilter.DisplayDate != default)
+            {
+                Booking booking = new Booking()
+                {
+                    CarID = Int32.Parse(SelectCarID.Text),
+                    CustomerID = Int32.Parse(SelectCustomerID.Text),
+                    Date = DateFilter.DisplayDate
+                };
+
+                try
+                {
+                    var content = new StringContent(JsonSerializer.Serialize(booking), Encoding.UTF8, "application/json");
+                    var carBookingResponse = await HttpClient.PostAsync("bookings", content);
+                    carBookingResponse.EnsureSuccessStatusCode();
+                    MessageBox.Text = "Car booked";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Text = "Car not available at this day!";
+                }
+
+            }
+            else
+            {
+                MessageBox.Text = "Please provide a booking date!";
             }
         }
     }

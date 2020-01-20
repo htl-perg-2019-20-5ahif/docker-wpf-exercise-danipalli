@@ -68,6 +68,9 @@ GET {{host}}/cars
 ###
 GET {{host}}/cars?year=2020&month=01&day=20
 
+###
+GET {{host}}/bookings
+
 
 
 
